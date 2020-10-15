@@ -76,9 +76,10 @@ const getAllPlanet = async (req, res) => {
   const putPlanet = async (req, res) => {
     try {
       const idPlanet = req.params.id;
-      const dataForm = JSON.parse(req.body)
-      const paramName = dataForm.paramName;
-      const paramValue = dataForm.paramValue;
+      console.log("el id para update", idPlanet)
+      //const dataForm = req.body
+      const paramName = req.body.paramName;
+      const paramValue = req.body.paramValue;
   
       const result = await Dynamo.updateItem(idPlanet, 'planet', paramName, paramValue);
       res.json(responses._200({message: 'Update Success'}));
