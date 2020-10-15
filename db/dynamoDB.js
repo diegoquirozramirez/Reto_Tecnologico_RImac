@@ -45,9 +45,10 @@ const Dynamo = {
             UpdateExpression: `set ${KeyAttribute} = :v`,
             ExpressionAttributeValues: {
                 ':v': KeyValue
-            }
+            },            
+            //ReturnValues: 'ALL_NEW' //NONE ALL_OLD UPDATED_OLD ALL_NEW UPDATED_NEW
         }).promise();
-
+        console.log(data)
         return data;
     },
 

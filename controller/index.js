@@ -26,14 +26,14 @@ const createPlanet = async (req, res) => {
             ...planetConsumer
             }
             const resSave = await Dynamo.saveItem('planet', post);
-            res.json(responses._201(post))
+            res.status(201).json(responses._201(post))
         }
         }else{
-            res.json(responses._200((resPlanet.Item)))
+            res.status(201).json(responses._200((resPlanet.Item)))
         }      
     } catch (error) {
         console.log("Error en createPlanet")
-        res.json(responses._500({body: 'Error en createPlanet'}))
+        res.status(500).json(responses._500({body: 'Error en createPlanet'}))
     }
 }
 
@@ -65,10 +65,10 @@ const getAllPlanet = async (req, res) => {
     try {
       const idPlanet = req.params.id;
       const result = await Dynamo.getByID(idPlanet, 'planet');
-      if(!result || !result.Item) res.json(responses._200({msm: 'Not found'}));
-      res.json(responses._200(result.Item));
+      if(!result || !result.Item) return res.json(responses._200({msm: 'Not found'}));
+      res.status(200).json(responses._200(result.Item));
     } catch (error) {
-      res.json(responses._500({msm: error}))
+      res.status(500).json(responses._500({msm: error}))
     }
   };
   
