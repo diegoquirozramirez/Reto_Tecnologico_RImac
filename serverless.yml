@@ -4,6 +4,7 @@ service: api
 plugins:
   - serverless-offline
   - serverless-plugin-include-dependencies
+  - serverless-mocha-plugin
 
 package:
   exclude:
@@ -42,6 +43,18 @@ provider:
 
 
 functions:
+  store:
+    handler: handler/store/index.handler
+    events:
+      - http: post stores
+      - http: get stores
+  myFunction:
+    handler: functions/myFunction/index.handler
+    events:
+      - http: post myResource
+      - http: get myResource
+  user:
+    handler: handler/user/index.handler
 
   #swagger:
   #  handler: swagger.swagger

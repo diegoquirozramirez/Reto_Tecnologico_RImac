@@ -22,5 +22,8 @@
     "serverless-plugin-include-dependencies": "^4.1.0",
     "swagger-ui-express": "^4.1.4",
     "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "serverless-mocha-plugin": "^1.12.0"
   }
 }
