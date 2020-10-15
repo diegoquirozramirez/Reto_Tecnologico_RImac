@@ -43,17 +43,12 @@ provider:
 
 functions:
 
-  swagger:
-    handler: swagger.swagger
-    events:
-      - http:
-          path: /swagger
-          method: get
-
-  ### for any paths
-  #events:
-  #    - http: ANY /
-  #    - http: ANY {proxy+}
+  #swagger:
+  #  handler: swagger.swagger
+  #  events:
+  #    - http:
+  #        path: /swagger
+  #        method: get
 
 
   createPost:
@@ -117,6 +112,13 @@ functions:
           parameters:
             paths:
               id: true
+
+
+  planetGet:
+    handler: handler.planet.planet
+    events:
+      - http: ANY /
+      - http: ANY {proxy+}
 
 
   createPlanet:
