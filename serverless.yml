@@ -43,18 +43,11 @@ provider:
 
 
 functions:
-  store:
-    handler: handler/store/index.handler
+  people:
+    handler: handler/people/index.handler
     events:
-      - http: post stores
-      - http: get stores
-  myFunction:
-    handler: functions/myFunction/index.handler
-    events:
-      - http: post myResource
-      - http: get myResource
-  user:
-    handler: handler/user/index.handler
+      - http: post people
+      - http: get people
 
   #swagger:
   #  handler: swagger.swagger
