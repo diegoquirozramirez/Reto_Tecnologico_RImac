@@ -1,100 +1,496 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Documentación de prueba en Swagger para docuemntar servicos REST",
+        "description": "Documentación Essential - [Tribu Gestión de Clientes][Reto técnico] Backend/Fullstack",
         "version": "1.0.0",
-        "title": "Documentación para Proyecto de Refinanciamiento",
+        "title": "Documentación Essential - RIMAC",
         "contact": {
-            "email": "diego.quiroz@acceso.com.pe"
+            "email": "ingquirozramirez@gmail.com"
         }
     },
-    "host": "0.0.0.0:5025",
-    "basePath": "/refinanciamiento",
+    "host": "h9qiv3afr5.execute-api.us-east-2.amazonaws.com",
+    "basePath": "/dev",
     "tags": [
         {
-            "name": "refinanciamiento",
-            "description": "Solicitud de refinanciamiento",
+            "name": "peoples",
+            "description": "Tags para consumir servicios API StarWar",
             "externalDocs": {
-                "description": "Puede ser golpeado directament desde insomnia"
+                "description": "Puede ser golpeado directament desde insomnia y/o postmam"
+            }
+        },
+        {
+            "name": "planet",
+            "description": "Integrado con Express JS",
+            "externalDocs": {
+                "description": "Puede ser golpeado directament desde insomnia y/o postmam"
             }
         }
     ],
     "schemes": [
-        "http"
+        "http",
+        "https"
     ],
     "paths": {
-        "/cliente": {
+        "/post/people/{number}": {
             "post": {
                 "tags": [
-                    "refinanciamiento"
+                    "peoples"
                 ],
-                "summary": "Endpoint for request a 'Refinanciamiento' through landing page",
-                "description": "This is a resource for validate acceso's customer and save information",
+                "summary": "Endpoint for request a search and create record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (createPost) in serverless.yml",
                 "operationId": "postData",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
+                        "name": "number",
+                        "in": "path",
+                        "description": "It is the number to search en DynamoDB if exists or save if not",
+                        "require": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    },
+                    "201": {
+                        "description": "It's working, status 201 created"
+                    }
+                }
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "peoples"
+                ],
+                "summary": "Endpoint for request a search all record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (getAllPots) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    }
+                }
+            }
+        },
+        "/posts/{number}": {
+            "get": {
+                "tags": [
+                    "peoples"
+                ],
+                "summary": "Endpoint for request a search limit record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (getPots) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "It is the number to search en DynamoDB",
+                        "require": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    }
+                }
+            }
+        },
+        "/post/{id}": {
+            "get": {
+                "tags": [
+                    "peoples"
+                ],
+                "summary": "Endpoint for request a search one record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (getPot) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "It is the id (identification) to search en DynamoDB",
+                        "require": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    }
+                }
+            }
+        },
+        "/post/update/{id}": {
+            "put": {
+                "tags": [
+                    "peoples"
+                ],
+                "summary": "Endpoint for request a update one record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (putPost) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "It is the id (identification) to search en DynamoDB",
+                        "require": true
+                    },
+                    {
                         "name": "body",
                         "in": "body",
+                        "description": "This is the body for update records",
                         "require": true,
                         "schema": {
-                            "$ref": "#/definitions/refinanciamiento"
+                          "type": "object",
+                          "properties": {
+                            "paramName": {
+                                "type": "string"
+                            },
+                            "paramValue": {
+                                "type": "string"
+                            },
+                          }
                         }
                     }
                 ],
                 "responses": {
-                    "00": {
-                        "description": "Se ejecuto correctamente"
-                    },
-                    "01": {
-                        "description": "Solicitud ya procesada y guardada"
-                    },
-                    "99": {
-                        "description": "Se cayo el sistema"
-                    },
-                    "02": {
-                        "description": "No es cliente acceso"
-                    },
-                    "66": {
-                        "description": "Error para validar cliente de acceso lb"
+                    "200": {
+                        "description": "It's working, status 200"
                     }
                 }
             }
-        }
+        },
+        "/post/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "peoples"
+                ],
+                "summary": "Endpoint for request a remove one record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (deletePost) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "It is the id (identification) to remove in DynamoDB",
+                        "require": true
+                    },
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    }
+                }
+            }
+        },
+        "/create/planet/{number}": {
+            "post": {
+                "tags": [
+                    "planet"
+                ],
+                "summary": "Endpoint for request a search and create record for model planet",
+                "description": "This is a resource by - EXECUTE FUNCTION (createPlanet) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "It is the number to search en DynamoDB if exists or save if not",
+                        "require": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    },
+                    "201": {
+                        "description": "It's working, status 201 created"
+                    }
+                }
+            }
+        },
+        "/planet": {
+            "get": {
+                "tags": [
+                    "planet"
+                ],
+                "summary": "Endpoint for request a search and create record for model planet",
+                "description": "This is a resource by - EXECUTE FUNCTION (getAllPlanet) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    },
+                    "201": {
+                        "description": "It's working, status 201 created"
+                    }
+                }
+            }
+        },
+        "/get/planets/{number}": {
+            "get": {
+                "tags": [
+                    "planet"
+                ],
+                "summary": "Endpoint for request a search and create record for model planet",
+                "description": "This is a resource by - EXECUTE FUNCTION (getPlanets) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "It is the number to search en DynamoDB if exists or save if not",
+                        "require": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    },
+                    "201": {
+                        "description": "It's working, status 201 created"
+                    }
+                }
+            }
+        },
+         "/planet/{id}": {
+            "get": {
+                "tags": [
+                    "planet"
+                ],
+                "summary": "Endpoint for request a search and create record for model planet",
+                "description": "This is a resource by - EXECUTE FUNCTION (getPlanet) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "It is the number to search en DynamoDB if exists or save if not",
+                        "require": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    },
+                    "201": {
+                        "description": "It's working, status 201 created"
+                    }
+                }
+            }
+        },
+         "/planet/update/{id}": {
+            "put": {
+                "tags": [
+                    "planet"
+                ],
+                "summary": "Endpoint for request a update one record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (putPlanet) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "It is the id (identification) to search en DynamoDB",
+                        "require": true
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "This is the body for update records",
+                        "require": true,
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "paramName": {
+                                "type": "string"
+                            },
+                            "paramValue": {
+                                "type": "string"
+                            },
+                          }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    }
+                }
+            }
+        },
+        "/planet/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "planet"
+                ],
+                "summary": "Endpoint for request a remove one record for model people",
+                "description": "This is a resource by - EXECUTE FUNCTION (deletePlanet) in serverless.yml",
+                "operationId": "postData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "It is the id (identification) to remove in DynamoDB",
+                        "require": true
+                    },
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's working, status 200"
+                    }
+                }
+            }
+        },
     },
 
     "definitions": {
-        "refinanciamiento": {
+        "planet": {
             "type": "object",
             "properties": {                
-                "documento": {
+                "diametro": {
                     "type": "string"
                 },
-                "tipoDocumento": {
-                    "type": "integer",
-                    "default": 1
+                "nombre": {
+                    "type": "string"                   
+                },
+                "rotacion": {
+                    "type": "string"
+                },
+                "popularidad": {
+                    "type": "string"
+                },
+                "agua": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "clima": {
+                    "type": "string"
+                },
+                "residentes": {
+                    "type": "array"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "films": {
+                    "type": "array"
+                },
+                "editado": {
+                    "type": "string"
+                },
+                "gravedad": {
+                    "type": "string"
+                },
+                "orbita": {
+                    "type": "string"
+                },
+                "creado": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "terreno": {
+                    "type": "string"
                 }
             },
             "xml": {
                 "name": "User"
             }
         },
-        "ApiResponse": {
+        "people": {
             "type": "object",
             "properties": {
-                "codRes": {
+                "nombre": {
                     "type": "string"
                 },
-                "message": {
+                "nacimiento": {
+                    "type": "string"
+                },
+                "piel": {
+                    "type": "string"
+                },
+                "created": {
+                    "type": "string"
+                },
+                "altura": {
+                    "type": "string"
+                },
+                "cabello": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "peso": {
+                    "type": "string"
+                },
+                "ojo": {
+                    "type": "string"
+                },
+                "natal": {
+                    "type": "string"
+                },
+                "editad": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "genero": {
                     "type": "string"
                 }
             }
         }
     },
     "externalDocs": {
-        "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
+        "description": "Find out more about Me",
+        "url": "https://github.com/diegoquirozramirez"
     }
 }

@@ -1,22 +1,29 @@
-
+## Name Service
 service: api
 
+
+# The plugins used in this project
 plugins:
   - serverless-offline
   - serverless-plugin-include-dependencies
   - serverless-mocha-plugin
 
+# It make the posible reduce the size MB for deploy
 package:
   exclude:
     - node_modules/**
+    - test/**
 
 frameworkVersion: '2'
 
+# Section for to customise variables
 custom:
   settings:
     POST_TABLE_PEOPLE: people
     POST_TABLE_PLANET: planet
 
+
+# Configuration essential AWS ()
 provider:
   name: aws
   runtime: nodejs12.x
@@ -43,12 +50,10 @@ provider:
 
 
 functions:
-  people:
-    handler: handler/people/index.handler
-    events:
-      - http: post people
-      - http: get people
 
+  ## This is section for function test for example ###
+  ### Command popular -- sls invoke test -f people
+  
   #swagger:
   #  handler: swagger.swagger
   #  events:
@@ -56,7 +61,7 @@ functions:
   #        path: /swagger
   #        method: get
 
-
+  # createPlanet : name function for create models people
   createPost:
     handler: handler.createPost
     events:
@@ -68,6 +73,7 @@ functions:
             paths:
               number: true
   
+  # getAllPlanet : name function for get all records of models people
   getAllPots:
     handler: handler.getAllPots
     events:
@@ -75,6 +81,7 @@ functions:
         path: /posts
         method: get
 
+  # getPlanets : name function for get the records with limits number
   getPots:
     handler: handler.getPots
     events:
@@ -86,6 +93,7 @@ functions:
             paths:
               number: true
 
+  # getPlanet : name function for get one records of models planet
   getPot:
     handler: handler.getPot
     events:
@@ -97,6 +105,7 @@ functions:
             paths:
               id: true
 
+  # putPlanet : name function for update one records of models planet
   putPost:
     handler: handler.putPost
     events:
@@ -108,25 +117,22 @@ functions:
             paths:
               id: true
 
+  # deletePlanet : name function for remove one records of models planet
   deletePost:
     handler: handler.deletePost
     events:
     - http:
-        path: /post/{id}
+        path: /post/delete/{id}
         method: delete
         request:
           parameters:
             paths:
               id: true
 
+  
+  #### This is section for the common way to create ande declare function lambdas ###
 
-  planetGet:
-    handler: handler.planet.planet
-    events:
-      - http: ANY /
-      - http: ANY {proxy+}
-
-
+  # createPlanet : name function for create models planet
   createPlanet:
     handler: handler.createPlanet
     events:
@@ -137,7 +143,8 @@ functions:
           parameters:
             paths:
               number: true
-  
+
+  # getAllPlanet : name function for get all records of models planet  
   getAllPlanet:
     handler: handler.getAllPlanet
     events:
@@ -145,6 +152,7 @@ functions:
         path: /planet
         method: get
 
+  # getPlanets : name function for get the records with limits number
   getPlanets:
     handler: handler.getPlanets
     events:
@@ -156,6 +164,7 @@ functions:
             paths:
               number: true
 
+  # getPlanet : name function for get one records of models planet
   getPlanet:
     handler: handler.getPlanet
     events:
@@ -167,6 +176,7 @@ functions:
             paths:
               id: true
 
+  # putPlanet : name function for update one records of models planet
   putPlanet:
     handler: handler.putPlanet
     events:
@@ -178,16 +188,29 @@ functions:
             paths:
               id: true
 
+  # deletePlanet : name function for remove one records of models planet
   deletePlanet:
     handler: handler.deletePlanet
     events:
     - http:
-        path: /planet/{id}
+        path: /planet/delete/{id}
         method: delete
         request:
           parameters:
             paths:
               id: true
+
+  
+  ### This is other way to use Express into Serverless using proxy's with only path ###
+  planetGet:
+    handler: handler.planet.planet
+    events:
+      #- http:
+      #    path: / # this matches the base path          
+      #    method: any
+      - http:
+          path: /planetv2/{any+} # this matches any path, the token 'any' doesn't mean anything special
+          method: any
 
 
 resources:

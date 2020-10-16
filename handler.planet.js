@@ -12,6 +12,6 @@ const bodyParser = require('body-parser')
     res.send('Hola mundo con expressJS')
 }) */
 app.use(bodyParser.json())
-app.use('/planet', route)
+app.use('/planetv2', route)
 
 module.exports.planet = serverless(app)
