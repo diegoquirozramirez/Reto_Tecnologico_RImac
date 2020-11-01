@@ -3,33 +3,29 @@
 const axios = require('axios');
 const modelPeople = require('../models/peopleModel')
 const modelPlanet = require('../models/planetModel')
+const { restClient } = require('../../../config/rest/configAxios');
+const responses = require('../../../config/responses/apiResponses')
 
 getPeople = async (number) => {
     try {
-        const {data} = await axios({
-            methos: 'GET',
-            url: `https://swapi.py4e.com/api/people/${number}`
-        })
         
-        const people = new modelPeople(
-            data.name,
-            data.height,
-            data.mass,
-            data.hair_color,
-            data.skin_color,
-            data.eye_color,
-            data.birth_year,
-            data.gender,
-            data.homeworld,
-            data.created,
-            data.edited,
-            data.url
-        )
-        console.log(people)
-        return people;
+        const data = await restClient(`https://swapi.py4e.com/api/peopl/${number}`, 'GET', {});
+        const { statusCode, body } = data;
+        if(statusCode != 200){
+            return data;
+        }else{            
+            //console.log("el body", JSON.parse(body))
+            const people = new modelPeople(JSON.parse(body))
+            if(people.genero == "n/a"){
+                people.generoValid = "N/A"
+            }
+            //console.log(people)
+            return responses._200({...people});
+        }
+        
     } catch (error) {
-        console.log(error)
-        return error
+        console.log("en el error del catch", error)
+        return responses._500({msm: "Error to execute getPeople", error: error});
     }
 }
 

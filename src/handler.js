@@ -1,9 +1,9 @@
 'use strict';
-const consumer = require('./services/consumer/index')
+const consumer = require('./externals/consumer/index')
 const md5 = require('md5')
-const responses = require('./responses/apiResponses')
+const responses = require('../config/responses/apiResponses')
 const os = require('os')
-const dynamo = require('./db/dynamoDB')
+const dynamo = require('../config/db/dynamo/repository')
 
 
 const postsTable = process.env.POST_TABLE_PEOPLE || 'people';
@@ -25,25 +25,30 @@ module.exports.createPost = async (event, context, callback) => {
   try {
     const numberPeople = event.pathParameters.number;
     const res = await dynamo.getByID(md5(numberPeople), postsTable);
-    console.log(res)
+    console.log("Respuesta del dynamo", res)
     if(!res || !res.Item){
       const peopleConsumer = await consumer.getPeople(numberPeople);
-      if(peopleConsumer){
+      console.log("la respuesta de peopleconsumer" , peopleConsumer)
+      const { statusCode, body } = peopleConsumer;
+      if(statusCode != 200){
+        throw new Error("Hubo error para consumir servicios externos")
+      }else{
         const post = {
           id: md5(numberPeople),
           createdAt: new Date().toISOString(),
           type: 1, // indicando que es para peoples
-          ...peopleConsumer
+          ...JSON.parse(body)
         }
         const resSave = await dynamo.saveItem(postsTable, post);
         return callback(null, responses._201(post))
-      }
+      }      
     }else{
       return callback(null, responses._200(res.Item))
     }
     
   } catch (error) {
-    callback(null, responses._500(error))
+    //console.log("error ", error.message)
+    return callback(null, responses._500({msm: error.message}))
   }
 };
 
@@ -51,6 +56,7 @@ module.exports.createPost = async (event, context, callback) => {
 module.exports.getAllPots = async (event, context, callback) => {
   try {
     const res = await dynamo.getAll(postsTable, 1);
+    console.warn("La respuesta del ALL dynamo", res)
     return callback(null, responses._200(res.Items.sort(sortBtId)))
   } catch (error) {
     return callback(null, responses._500({msm: error}))

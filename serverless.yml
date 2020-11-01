@@ -54,16 +54,10 @@ functions:
   ## This is section for function test for example ###
   ### Command popular -- sls invoke test -f people
   
-  #swagger:
-  #  handler: swagger.swagger
-  #  events:
-  #    - http:
-  #        path: /swagger
-  #        method: get
-
+  
   # createPlanet : name function for create models people
   createPost:
-    handler: handler.createPost
+    handler: src/handler.createPost
     events:
     - http:
         path: /post/people/{number}
@@ -75,7 +69,7 @@ functions:
   
   # getAllPlanet : name function for get all records of models people
   getAllPots:
-    handler: handler.getAllPots
+    handler: src/handler.getAllPots
     events:
     - http:
         path: /posts
@@ -83,7 +77,7 @@ functions:
 
   # getPlanets : name function for get the records with limits number
   getPots:
-    handler: handler.getPots
+    handler: src/handler.getPots
     events:
     - http:
         path: /posts/{number}
@@ -95,7 +89,7 @@ functions:
 
   # getPlanet : name function for get one records of models planet
   getPot:
-    handler: handler.getPot
+    handler: src/handler.getPot
     events:
     - http:
         path: /post/{id}
@@ -107,7 +101,7 @@ functions:
 
   # putPlanet : name function for update one records of models planet
   putPost:
-    handler: handler.putPost
+    handler: src/handler.putPost
     events:
     - http:
         path: /post/update/{id}
@@ -119,7 +113,7 @@ functions:
 
   # deletePlanet : name function for remove one records of models planet
   deletePost:
-    handler: handler.deletePost
+    handler: src/handler.deletePost
     events:
     - http:
         path: /post/delete/{id}
@@ -128,90 +122,6 @@ functions:
           parameters:
             paths:
               id: true
-
-  
-  #### This is section for the common way to create ande declare function lambdas ###
-
-  # createPlanet : name function for create models planet
-  createPlanet:
-    handler: handler.createPlanet
-    events:
-    - http:
-        path: /create/planet/{number}
-        method: post
-        request:
-          parameters:
-            paths:
-              number: true
-
-  # getAllPlanet : name function for get all records of models planet  
-  getAllPlanet:
-    handler: handler.getAllPlanet
-    events:
-    - http:
-        path: /planet
-        method: get
-
-  # getPlanets : name function for get the records with limits number
-  getPlanets:
-    handler: handler.getPlanets
-    events:
-    - http:
-        path: /get/planets/{number}
-        method: get
-        request:
-          parameters:
-            paths:
-              number: true
-
-  # getPlanet : name function for get one records of models planet
-  getPlanet:
-    handler: handler.getPlanet
-    events:
-    - http:
-        path: /planet/{id}
-        method: get
-        request:
-          parameters:
-            paths:
-              id: true
-
-  # putPlanet : name function for update one records of models planet
-  putPlanet:
-    handler: handler.putPlanet
-    events:
-    - http:
-        path: /planet/update/{id}
-        method: put
-        request:
-          parameters:
-            paths:
-              id: true
-
-  # deletePlanet : name function for remove one records of models planet
-  deletePlanet:
-    handler: handler.deletePlanet
-    events:
-    - http:
-        path: /planet/delete/{id}
-        method: delete
-        request:
-          parameters:
-            paths:
-              id: true
-
-  
-  ### This is other way to use Express into Serverless using proxy's with only path ###
-  planetGet:
-    handler: handler.planet.planet
-    events:
-      #- http:
-      #    path: / # this matches the base path          
-      #    method: any
-      - http:
-          path: /planetv2/{any+} # this matches any path, the token 'any' doesn't mean anything special
-          method: any
-
 
 resources:
   Resources:

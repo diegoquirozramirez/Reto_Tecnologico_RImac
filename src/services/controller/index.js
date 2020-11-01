@@ -1,9 +1,7 @@
-const { getPlanet  } = require('../services/consumer/index')
-const AWS = require('aws-sdk')
-const modelPlanet = require('../services/models/planetModel')
-const Dynamo = require('../db/dynamoDB')
+const { getPlanet  } = require('../../externals/consumer/index')
+const Dynamo = require('../../../config/db/dynamo/repoitory')
 const md5 = require('md5')
-const responses = require('../responses/apiResponses')
+const responses = require('../../../config/responses/apiResponses')
 
 
 function sortBtId(a,b){

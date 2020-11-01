@@ -1,9 +1,9 @@
 const serverless = require('serverless-http')
 const express = require('express')
 const app = express();
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./utils/swagger.json');
-const route = require('./router/index')
+/* const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./utils/swagger.json'); */
+const route = require('./services/router/index')
 const bodyParser = require('body-parser')
 
 //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
