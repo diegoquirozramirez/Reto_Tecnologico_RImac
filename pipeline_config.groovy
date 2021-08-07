@@ -1,5 +1,7 @@
 pipeline_template = "template_default"
 
+agent any
+
 libraries{
     npm
     sonarqube
