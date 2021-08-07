@@ -1,5 +1,5 @@
 libraries{
-    maven
+    npm
     sonarqube
 }
 /*pipeline {
