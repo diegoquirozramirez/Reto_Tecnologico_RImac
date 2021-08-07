@@ -2,7 +2,7 @@ pipeline_template = "template_default"
 
 agent any
 
-def scriptDir = getClass().protectionDomain.codeSource.location.path
+def scriptDir = pwd()
 
 libraries{
     npm {
