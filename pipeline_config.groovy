@@ -2,7 +2,8 @@ pipeline_template = "template_default"
 
 libraries{
     npm
-    sonarqube
+    sonarqube,
+    ansible
 }
 
 application_environments{
