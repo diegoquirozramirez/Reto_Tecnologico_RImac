@@ -5,6 +5,8 @@ agent any
 libraries{
     npm {
         image_tag = "node:10.16.3-alpine"
+        dockerfile = "./Dockerfile"
+        docker_compose = "./docker-compose.yaml"
     }
     sonarqube
     ansible
