@@ -1,8 +1,8 @@
-/*libraries{
+libraries{
     maven
     sonarqube
-}*/
-pipeline {
+}
+/*pipeline {
     agent any
 
     stages {
@@ -12,4 +12,4 @@ pipeline {
             }
         }
     }
-}
+}*/
