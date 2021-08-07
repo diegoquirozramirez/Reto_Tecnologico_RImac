@@ -2,13 +2,15 @@ pipeline_template = "template_default"
 
 agent any
 
+def scriptDir = getClass().protectionDomain.codeSource.location.path
+
 libraries{
     npm {
         image_tag = "node:10.16.3-alpine"
-        dockerfile = "${PWD}/Dockerfile"
-        docker_compose = "${PWD}/docker-compose.yaml"
-        example = "${PWD}/example.sh"
-        dir = "${PWD}"
+        dockerfile = "${scriptDir}/Dockerfile"
+        docker_compose = "${scriptDir}/docker-compose.yaml"
+        example = "${scriptDir}/example.sh"
+        dir = "${scriptDir}"
     }
     sonarqube
     ansible
