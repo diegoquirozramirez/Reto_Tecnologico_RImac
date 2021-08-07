@@ -2,8 +2,6 @@ pipeline_template = "template_default"
 
 agent any
 
-def scriptDir = pwd()
-
 libraries{
     npm {
         image_tag = "node:10.16.3-alpine"
