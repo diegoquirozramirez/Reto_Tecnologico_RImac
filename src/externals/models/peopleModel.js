@@ -17,6 +17,6 @@ module.exports = class peopleModel{
         }
 
         set generoValid(name){
-            return this.genero = name;
+            this.genero = name;
         }
 }

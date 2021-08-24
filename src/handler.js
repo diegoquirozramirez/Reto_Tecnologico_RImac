@@ -39,7 +39,7 @@ module.exports.createPost = async (event, context, callback) => {
           type: 1, // indicando que es para peoples
           ...JSON.parse(body)
         }
-        const resSave = await dynamo.saveItem(postsTable, post);
+        await dynamo.saveItem(postsTable, post);
         return callback(null, responses._201(post))
       }      
     }else{
@@ -96,7 +96,7 @@ module.exports.putPost = async (event, context, callback) => {
     const paramName = dataForm.paramName;
     const paramValue = dataForm.paramValue;
 
-    const res = await dynamo.updateItem(idPost, postsTable, paramName, paramValue);
+    await dynamo.updateItem(idPost, postsTable, paramName, paramValue);
     return callback(null, responses._200({message: 'Update Success'}));
   } catch (error) {
     return callback(null, responses._500(error))
@@ -135,7 +135,7 @@ module.exports.createPlanet = async (event, context, callback) => {
           type: 2, // indicando que es para planets
           ...planetConsumer
         }
-        const resSave = await dynamo.saveItem(postsTablePlanet, post);
+        await dynamo.saveItem(postsTablePlanet, post);
         return callback(null, responses._201(post))
       }
     }else{
@@ -188,7 +188,7 @@ module.exports.putPlanet = async (event, context, callback) => {
     const paramName = dataForm.paramName;
     const paramValue = dataForm.paramValue;
 
-    const res = await dynamo.updateItem(idPlanet, postsTablePlanet, paramName, paramValue);
+    await dynamo.updateItem(idPlanet, postsTablePlanet, paramName, paramValue);
     return callback(null, responses._200({message: 'Update Success'}));
   } catch (error) {
     return callback(null, responses._500(error))

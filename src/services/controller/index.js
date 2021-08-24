@@ -23,7 +23,7 @@ const createPlanet = async (req, res) => {
             type: 2, // indicando que es para planets
             ...planetConsumer
             }
-            const resSave = await Dynamo.saveItem('planet', post);
+            await Dynamo.saveItem('planet', post);
             res.status(201).json(responses._201(post))
         }
         }else{
@@ -79,7 +79,7 @@ const getAllPlanet = async (req, res) => {
       const paramName = req.body.paramName;
       const paramValue = req.body.paramValue;
   
-      const result = await Dynamo.updateItem(idPlanet, 'planet', paramName, paramValue);
+      await Dynamo.updateItem(idPlanet, 'planet', paramName, paramValue);
       res.json(responses._200({message: 'Update Success'}));
     } catch (error) {
       res.json(responses._500({msm: error}))

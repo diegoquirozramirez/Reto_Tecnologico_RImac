@@ -6,7 +6,7 @@ const modelPlanet = require('../models/planetModel')
 const { restClient } = require('../../../config/rest/configAxios');
 const responses = require('../../../config/responses/apiResponses')
 
-getPeople = async (number) => {
+const getPeople = async (number) => {
     try {
         
         const data = await restClient(`https://swapi.py4e.com/api/peopl/${number}`, 'GET', {});
@@ -29,7 +29,7 @@ getPeople = async (number) => {
     }
 }
 
-getPlanet = async (number) => {
+const getPlanet = async (number) => {
     try {
         const {data} = await axios({
             methos: 'GET',
