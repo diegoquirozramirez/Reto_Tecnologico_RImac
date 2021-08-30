@@ -4,7 +4,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage --coverageDirectory=output/coverage/jest"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,18 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "jest": "^27.1.0",
+    "jest-sonar-reporter": "^2.0.0",
     "serverless-mocha-plugin": "^1.12.0"
+  },
+  "testMatch": [
+    "**/__tests__/**/*.[jt]s?(x)",
+    "**/?(*.)+(spec|test).[tj]s?(x)"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "jest": {
+    "testResultsProcessor": "jest-sonar-reporter"
   }
 }
